@@ -7,7 +7,7 @@ from flask import abort
 from config import db, metadata
 
 
-class Pizza( db.Model, SerializerMixin):
+class User( db.Model, SerializerMixin):
     pass
 
 # Models go here!
