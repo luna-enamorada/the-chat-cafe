@@ -5,7 +5,7 @@ from flask_migrate import Migrate
 
 # Local imports
 from config import app, db, api
-from models import User, Recipe
+from models import User, Forum, Post, Comment
 
 # Views go here!
 

@@ -8,9 +8,40 @@ from config import db, metadata
 
 
 class User( db.Model, SerializerMixin):
-    pass
+    __tablename__ = 'users'
 
-class Forums(db.Model, SerializerMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String)
+    email = db.Column(db.String)
+    password = db.Column(db.String)
+    #avatar = db.Column(db.Blob)
+    bio = db.Column(db.String)
+
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate=db.func.now())
+
+    forums = db.relationship('Forum', backref='user')
+    posts = db.relationship('Post', backref='user')
+    comments = db.relationship('Comment', backref='user')
+
+    @validates('username')
+    def validate_username(self, attr, username):
+        un = User.query.filter(User.username.like(f'%{username}%')).first()
+        if type(username) is str and username and un == None :
+            return username
+        else: abort(422, 'Username must be unique.')
+
+    @validates('email')
+    def validate_email(self, attr, email):
+        em = User.query.filter(User.email.like(f'%{email}%')).first()
+        if type(email) is str and email and em == None :
+            return email
+        else: abort(422, 'Email has already been registered.')
+
+    def __repr__(self):
+        return f'<User {self.id}: {self.username}>'
+
+class Forum(db.Model, SerializerMixin):
     __tablename__ = 'forums'
 
     #serialize_rules = (-'users.forum')
@@ -18,7 +49,7 @@ class Forums(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
     description = db.Column(db.String)
-    image = db.Column(db.Blob)
+    #image = db.Column(db.Blob)
     favorited_forums = db.Column(db.Boolean)
 
     created_at = db.Column(db.DateTime, server_default=db.func.now())
@@ -34,9 +65,9 @@ class Forums(db.Model, SerializerMixin):
         else: abort(422, 'Forum title must be longer than zero characters.')
 
     def __repr__(self):
-        return f'<Forums {self.id}: {self.title}>'
+        return f'<Forum {self.id}: {self.title}>'
 
-class Posts(db.Model, SerializerMixin):
+class Post(db.Model, SerializerMixin):
     __tablename__ = 'posts'
 
     #serialize_rules = (-'users.post')
@@ -44,7 +75,7 @@ class Posts(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
     content = db.Column(db.String)
-    image = db.Column(db.Blob)
+    #image = db.Column(db.Blob)
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     forum_id = db.Column(db.Integer, db.ForeignKey('forums.id'))
@@ -53,8 +84,6 @@ class Posts(db.Model, SerializerMixin):
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
     comments = db.relationship('Comment', backref='post')
-    forum = db.relationship('Forum', backref='posts')
-    user = db.relationship('User', backref='posts')
 
     @validates('title')
     def validate_title(self, attr, title):
@@ -63,9 +92,9 @@ class Posts(db.Model, SerializerMixin):
         else: abort('Post titles must be longer than zero characters.')
 
     def __repr__(self):
-        return f'<Posts {self.id}: {self.title}>'
+        return f'<Post {self.id}: {self.title}>'
 
-class Comments(db.Model, SerializerMixin):
+class Comment(db.Model, SerializerMixin):
     __tablename__ = 'comments'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -77,9 +106,6 @@ class Comments(db.Model, SerializerMixin):
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
-    user = db.relationship('User', backref='comments')
-    post = db.relationship('Post', backref='comments')
-
     def __repr__(self):
-        return f'<Comments {self.id} >'
+        return f'<Comment {self.id} >'
 # Models go here!
