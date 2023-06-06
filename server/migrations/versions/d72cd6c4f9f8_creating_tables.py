@@ -1,8 +1,8 @@
-"""create tables
+"""creating tables
 
-Revision ID: bb7e39504985
+Revision ID: d72cd6c4f9f8
 Revises: 
-Create Date: 2023-06-05 17:13:38.672316
+Create Date: 2023-06-05 21:35:51.310399
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'bb7e39504985'
+revision = 'd72cd6c4f9f8'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,6 +22,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(), nullable=True),
     sa.Column('description', sa.String(), nullable=True),
+    sa.Column('image', sa.LargeBinary(), nullable=True),
     sa.Column('favorited_forums', sa.Boolean(), nullable=True),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
@@ -31,7 +32,8 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('username', sa.String(), nullable=True),
     sa.Column('email', sa.String(), nullable=True),
-    sa.Column('password', sa.String(), nullable=True),
+    sa.Column('_password', sa.String(), nullable=True),
+    sa.Column('avatar', sa.LargeBinary(), nullable=True),
     sa.Column('bio', sa.String(), nullable=True),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
@@ -41,6 +43,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(), nullable=True),
     sa.Column('content', sa.String(), nullable=True),
+    sa.Column('image', sa.LargeBinary(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('forum_id', sa.Integer(), nullable=True),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),

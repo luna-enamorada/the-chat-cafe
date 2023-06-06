@@ -28,20 +28,20 @@ class User( db.Model, SerializerMixin):
     @validates('username')
     def validate_username(self, attr, username):
         un = User.query.filter(User.username.like(f'%{username}%')).first()
-        if type(username) is str and username and un == None and len(username) in range(5, 16) and re.match(r'^[A-Za-z0-9_]+$', username)::
+        if type(username) is str and username and un == None and len(username) in range(5, 16) and re.match(r'^[A-Za-z0-9_]+$', username):
             return username
-          
+
         else: abort(422, 'Username must be unique string between 5 - 15 characters and not contain any special characters.')
-          
+
 
     @validates('email')
     def validate_email(self, attr, email):
         em = User.query.filter(User.email.like(f'%{email}%')).first()
-        if type(email) is str and email and em == None "@" and ".com" not in email:
+        if type(email) is str and email and em == None and "@" and ".com" not in email:
             return email
         else: abort(422, 'Must be a  valid email or email has already been registered.')
-          
-     @validates('avatar')
+
+    @validates('avatar')
     def validate_avatar( self, attr, avatar ):
         if avatar is not None:
             file_format = imghdr.what(None, h= avatar)
@@ -49,7 +49,7 @@ class User( db.Model, SerializerMixin):
                 abort ("Only JPEG images are permitted.")
         return avatar.filename
 
-      @validates( 'password' )
+    @validates( 'password' )
     def validate_password( self, attr, password ):
         if type(password) is str and len(password) in range(4, 16):
             return "Password has been set."
@@ -81,7 +81,7 @@ class Forum(db.Model, SerializerMixin):
         if type(title) is str and title:
             return title
         else: abort(422, 'Forum title must be longer than zero characters.')
-       
+
     @validates('image')
     def validate_avatar( self, attr, image ):
         if image is not None:
@@ -117,8 +117,8 @@ class Post(db.Model, SerializerMixin):
         if type(title) is str and title: 
             return title
         else: abort('Post titles must be longer than zero characters.')
-   
-      @validates('image')
+
+    @validates('image')
     def validate_avatar( self, attr, image ):
         if image is not None:
             file_format = imghdr.what(None, h= image)
