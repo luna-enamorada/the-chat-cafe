@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
+import Home from './Home';
 
-function App() {
-  // Code goes here!
+function App() { 
+
+
+  return (
+    <div>
+      < Route exact path="/">
+        <Home />
+      </Route>
+    </div>
+  )
 }
 
 export default App;
