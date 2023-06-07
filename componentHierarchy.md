@@ -4,6 +4,7 @@
 │   │   ├── LogIn
 │   ├── NavBar
 │   │   ├── Pages
+│   │   │   ├── Home
 │   │   │   ├── Register
 │   │   │   ├── MemberList
 │   │   │   ├── ForumList
