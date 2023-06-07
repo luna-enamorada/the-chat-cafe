@@ -33,7 +33,6 @@ class User( db.Model, SerializerMixin):
 
         else: abort(422, 'Username must be unique string between 5 - 15 characters and not contain any special characters.')
 
-
     @validates('email')
     def validate_email(self, attr, email):
         em = User.query.filter(User.email.like(f'%{email}%')).first()
