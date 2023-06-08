@@ -3,16 +3,10 @@ from flask_restful import Resource
 from flask import Flask, request, make_response, jsonify, session, abort
 from flask_migrate import Migrate
 from werkzeug.exceptions import NotFound, Unauthorized
-from flask_cors import CORS
 
 # Local imports
 from config import app, db, api
 from models import User, Forum, Post, Comment
-
-...
-app = Flask(__name__)
-...
-CORS(app)
 
 @app.route('/')
 def index():
