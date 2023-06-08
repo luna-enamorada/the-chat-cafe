@@ -150,7 +150,7 @@ class PostByID( Resource ):
             200
         )
         return response
-
+# eventually want to add in a way so that only the person who made the post can access patch and delete functions
     def patch(self, id ):
         post  = Post.find(id)
         for attr in request.get_json():
