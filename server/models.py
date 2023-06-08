@@ -21,10 +21,9 @@ class User( db.Model, SerializerMixin):
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
-    # forums = db.relationship('Forum', backref='user')
-    forums = association_proxy( 'users', 'forum')
     posts = db.relationship('Post', backref='user')
     comments = db.relationship('Comment', backref='user')
+    forums = association_proxy( 'users', 'forum')
 
     @classmethod
     def find ( cls, id ) :
@@ -87,13 +86,11 @@ class User( db.Model, SerializerMixin):
 class Forum(db.Model, SerializerMixin):
     __tablename__ = 'forums'
 
-    #serialize_rules = (-'users.forum')
-
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
     description = db.Column(db.String)
     image = db.Column(db.LargeBinary)
-    # favorited_forums = db.Column(db.Boolean)
+    favorited_forums = db.Column(db.Boolean)
 
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
@@ -143,8 +140,6 @@ class Forum(db.Model, SerializerMixin):
 
 class Post(db.Model, SerializerMixin):
     __tablename__ = 'posts'
-
-    #serialize_rules = (-'users.post')
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
