@@ -20,8 +20,10 @@ function Header() {
       <Route path ='/users' exact component={MemberList} />
       <Route path ='/forums' exact component={ForumList} />
       <Route path ='/posts' exact component={LatestPosts} />
-      <Route path ='/register' exact component={null} />
-
+      <Route path ='/register' exact component={Register} />
+      <Route path ='/login' exact component={Login} />
+      <Route path ='/forums/:id' exact component={Forum}/>
+      <Route path ='/posts/:id' exact component={Posts}/>
     </Switch>
   );
 }
