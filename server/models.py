@@ -25,6 +25,22 @@ class User( db.Model, SerializerMixin):
     comments = db.relationship('Comment', backref='user')
     forums = association_proxy( 'users', 'forum')
 
+    def to_json(self):
+        return {"name": self.username,
+                "email": self.email}
+    
+    def is_authenticated(self):
+        return True
+    
+    def is_active(self):
+        return True
+    
+    def is_anonymous(self):
+        return False
+    
+    def get_id(self):
+        return str(self.id)
+
     @classmethod
     def find ( cls, id ) :
         user = User.query.filter( User.id == id ).first()

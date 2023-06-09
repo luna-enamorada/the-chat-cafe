@@ -4,6 +4,7 @@ from flask import Flask, request, make_response, jsonify, session, abort
 from flask_migrate import Migrate
 from werkzeug.exceptions import NotFound, Unauthorized
 
+
 # Local imports
 from config import app, db, api
 from models import User, Forum, Post, Comment
@@ -20,6 +21,7 @@ class Users( Resource ):
             jsonify(users), 200
         )
         return response
+    
 api.add_resource( Users, '/users', endpoint = 'users' )
 
 class Forums( Resource ):
@@ -237,20 +239,13 @@ api.add_resource(Register, '/register')
 class Login( Resource ):
     def post(self):
         rq = request.get_json()
-        user = User.query.filter( User.username.like( f"%{ rq[ 'name' ] }%" ) ).first() 
-
+        user = User.query.filter(User.name.like(f"%{rq['name']}%")).first()
         if user:
-            session[ 'user_id' ] = user.id
-            return user.user_dict(), 200
-        else:
-            return { 'errors': [ 'Invalid username/password. Please try again.' ] }, 401
-api.add_resource( Login, '/login', endpoint = 'login' )
+            session['user_id'] = user.id
+            return user.user_info(), 200
+        else: return {'errors': ['Invalid username/password. Please try again.']}, 401
 
-class Logout( Resource ):
-    def delete(self):
-        session[ 'user_id' ] = None
-        return ' ', 204
-api.add_resource( Logout, '/logout', endpoint = 'logout' )
+api.add_resource( Login, '/login', endpoint = 'login' )
 
 class AuthorizeSession( Resource ):
     def get(self):
@@ -260,6 +255,12 @@ class AuthorizeSession( Resource ):
             user = User.query.filter_by( id = session[ 'user_id'] ).first()
             return user.user_dict(), 200
 api.add_resource( AuthorizeSession, '/authorize', endpoint = 'authorize' )
+
+class Logout(Resource):
+    def delete(self):
+        session['user_id'] = None
+        return '', 204
+api.add_resource(Logout, '/logout', endpoint = 'logout')
 
 
 @app.errorhandler(NotFound)

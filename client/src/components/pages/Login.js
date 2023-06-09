@@ -1,15 +1,30 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import PropTypes from 'prop-types';
 
-function Login() {
+async function logininUser(credentials) {
+    return fetch('http://127.0.0.1:5555/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(credentials)
+    })
+    .then(data => data.json())
+}
+
+function Login({setToken}) {
     const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [_password, setPassword] = useState("")
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async e => {
         e.preventDefault()
-        console.log({email, password})
-        setEmail("")
-        setPassword("")
+        const token = await logininUser({
+            email,
+            _password
+        });
+        setToken(token);
     }
 
     return (
@@ -31,7 +46,7 @@ function Login() {
                     name="password"
                     id='password'
                     required
-                    value={password}
+                    value={_password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <button className="loginBtn">SIGN IN</button>
@@ -41,6 +56,10 @@ function Login() {
             </form>
         </main>
     )
+}
+
+Login.propTypes = {
+    setToken: PropTypes.func.isRequired
 }
 
 export default Login;
