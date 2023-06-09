@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import PropTypes from 'prop-types';
 
-async function logininUser(credentials) {
+function logininUser(credentials) {
     return fetch('http://127.0.0.1:5555/login', {
         method: 'POST',
         headers: {
@@ -18,9 +18,9 @@ function Login({setToken}) {
     const [email, setEmail] = useState("")
     const [_password, setPassword] = useState("")
 
-    const handleSubmit = async e => {
+    const handleSubmit = e => {
         e.preventDefault()
-        const token = await logininUser({
+        const token = logininUser({
             email,
             _password
         });

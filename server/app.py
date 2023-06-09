@@ -32,6 +32,28 @@ class Forums( Resource ):
             jsonify(forums), 200
         )
         return response
+    
+    def post(self):
+        rq = request.get_json()
+
+        new_forum = Forum(
+            title = rq['title'],
+            description = rq['description']
+        )
+
+        response = make_response( 
+            jsonify(new_forum.forum_dict(), 201)
+        )
+
+        if Forum.validation_errors :
+            errors = Forum.return_validation_errors()
+            Forum.clear_validation_errors()
+            return { 'errors': errors }, 422
+        
+        db.session.add(new_forum)
+        db.session.commit()
+
+        return response
 api.add_resource( Forums, '/forums' )
 
 class Posts( Resource ):

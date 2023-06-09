@@ -222,6 +222,12 @@ class Post(db.Model, SerializerMixin):
             'user_id': self.user_id,
             'forum_id': self.forum_id,
         }
+    
+    def forum_dict(self):
+        return {
+            'title': self.title,
+            'content': self.content
+        }
 
 
     def __repr__(self):

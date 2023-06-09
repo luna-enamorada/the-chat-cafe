@@ -1,25 +1,25 @@
 import { Link } from "react-router-dom";
 import MemberList from "./pages/MemberList";
-import HomePage from "./pages/HomePage";
+import Home from "./Home";
 import ForumList from "./pages/ForumList";
 
 import React, {useState} from "react";
 import {
-  Nav,
-  NavLink,
-  Bars,
-  NavMenu,
-  NavBtn,
-  NavBtnLink,
+    Nav,
+    NavLink,
+    Bars,
+    NavMenu,
+    NavBtn,
+    NavBtnLink,
 } from './NavbarElements';
 import { Switch } from "react-router-dom/cjs/react-router-dom.min";
 
 
 function Navbar({ selectedPage, setSelectedPage }) {
 
-  return (
+    return (
     <Switch>
-      <Nav className="item-menu">
+        <Nav className="item-menu">
         <NavMenu>
 
             <NavLink to="/" > 
@@ -43,13 +43,13 @@ function Navbar({ selectedPage, setSelectedPage }) {
             </NavLink>
 
             <NavBtn>
-              <NavBtnLink to='/login'>Log In</NavBtnLink>
+            <NavBtnLink to='/login'>Log In</NavBtnLink>
             </NavBtn>
 
         </NavMenu>
-      </Nav>
+        </Nav>
     </Switch>
-  );
+    );
 }
 
 export default Navbar;
