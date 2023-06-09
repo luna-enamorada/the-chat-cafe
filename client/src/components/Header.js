@@ -23,7 +23,6 @@ function Header() {
       <Route path ='/login' exact component={Login} />
       <Route path ='/forums/:id' exact component={Forum}/>
       <Route path ='/posts/:id' exact component={Posts}/>
-
     </Switch>
   );
 }
