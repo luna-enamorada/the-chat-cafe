@@ -13,16 +13,23 @@ Welcome to The Chat Café! This is a dynamic and interactive forum website that 
 ## Register
 - Users will be able to register a new account with an email, unique username, and password. 
 - Add a profile picture and bio for extra flare. 😺
-## Forums + Tags
-- Forums must have a title, description, and an image. 
-- Forums can be created, modified, or deleted by the original owner. 
-- Forums are sorted by tags. Example: a forum about Spiderman🕷️ can be tagged with `Comic`, but if you're talking about the movie then tag with `Movie`. 
+## Forums 
+- Forums must have a title and description. 
 ## Posts + Comments
 - Users can create posts within forums and contribute to discussions via comments. 
-- All posts regardless will be displayed under the allposts page. 
-## Search 
-- Users will be able to search for specific forums and/or filter through them by tags. 
-- Users can also search through the members list. 
+- All posts regardless will be displayed under the 'All posts' page. 
 
 # Installation
-TBA
+## For front-end open up a terminal
+- cd into `client`
+### run the following code:
+## `npm install`
+## `npm start`
+
+## For back-end open up a new terminal
+- cd into `server`
+### run the following code:
+## `pipenv install`
+## `pipenv shell`
+- cd into `server` again
+## `python app.py`

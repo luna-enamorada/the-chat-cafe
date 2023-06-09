@@ -21,6 +21,7 @@ function MemberList(){
         <div className="member-list">
           <h1 className="all-members"> </h1>
             {renderMemberCards}
+            
         </div>
       </main>
     )

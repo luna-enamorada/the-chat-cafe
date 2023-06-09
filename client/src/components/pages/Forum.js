@@ -35,7 +35,7 @@ function Forum() {
       <h3>{forum.description}</h3>
       <div>
         {forum.posts.map((post) => (
-          <Link to={`/forums/${forum.id}/posts/${post.id}`} key={post.id}>
+          <Link to={`/posts/${post.id}`} key={post.id}>
             <h3>{post.title}</h3>
           </Link>
         ))}

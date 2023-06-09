@@ -7,13 +7,13 @@ function Home() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        newForum()
+        newForum
         setTitle("")
         setDescription("")
     }
 
     const newForum = () => {
-        fetch("http://127.0.0.1:5555/forums", {
+        fetch("http://127.0.0.1:5555/register", {
             method: "POST",
             body: JSON.stringify({
                 title,
@@ -27,7 +27,7 @@ function Home() {
         .then((data) => {
             console.log(data);
         })
-        .catch((err) => console.error(err))
+        .catch((err) => console.error(err));
     }
 
     return (
@@ -42,7 +42,7 @@ function Home() {
                             type="text"
                             name="title"
                             required
-                            value={title}
+                            value={forum}
                             onChange={(e) => setTitle(e.target.value)}
                         />
                         <label htmlFor="forum">Description</label>
@@ -50,7 +50,7 @@ function Home() {
                             type="text"
                             name="description"
                             required
-                            value={description}
+                            value={forum}
                             onChange={(e) => setDescription(e.target.value)}
                         />
                     </div>

@@ -217,6 +217,7 @@ class Post(db.Model, SerializerMixin):
 
     def post_dict ( self ) :
         return {
+            'id':self.id,
             'title': self.title,
             'content': self.content,
             'user_id': self.user_id,
