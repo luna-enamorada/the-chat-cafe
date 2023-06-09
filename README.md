@@ -17,7 +17,7 @@ Welcome to The Chat Café! This is a dynamic and interactive forum website that 
 - Forums must have a title and description. 
 ## Posts + Comments
 - Users can create posts within forums and contribute to discussions via comments. 
-- All posts regardless will be displayed under the allposts page. 
+- All posts regardless will be displayed under the 'All posts' page. 
 
 # Installation
 ## For front-end open up a terminal
