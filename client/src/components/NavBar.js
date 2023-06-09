@@ -35,6 +35,14 @@ function Navbar({ selectedPage, setSelectedPage }) {
           <NavLink to="/posts" >
           All Posts
           </NavLink>
+
+          <NavLink to="/register">
+            Register
+          </NavLink>
+
+          <NavLink to="/login">
+            Login
+          </NavLink>
       </NavMenu>
     </Nav>
   );

@@ -12,7 +12,7 @@ function ForumList(){
     const renderForumCards = forum.map( forum => 
       <div>
           <h2> {forum.title} </h2>
-          <h3> {forum.content} </h3>
+          <h3> {forum.description} </h3>
       </div>
     )
 
