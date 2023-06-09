@@ -12,31 +12,43 @@ import {
   NavBtn,
   NavBtnLink,
 } from './NavbarElements';
+import { Switch } from "react-router-dom/cjs/react-router-dom.min";
 
 
 function Navbar({ selectedPage, setSelectedPage }) {
 
   return (
-    <Nav className="item-menu">
-      <Bars />
-      <NavMenu>
-          <NavLink to="/" > 
-          <h1> The Chat Cafe </h1>
-          </NavLink>
+    <Switch>
+      <Nav className="item-menu">
+        <NavMenu>
 
-          <NavLink to="/users"
-          > Members
-          </NavLink>
+            <NavLink to="/" > 
+            <h1> The Chat Cafe </h1>
+            </NavLink>
 
-          <NavLink to="/forums" >
-          Forums
-          </NavLink>
+            <NavLink to="/register" >
+            Register
+            </NavLink>
 
-          <NavLink to="/posts" >
-          All Posts
-          </NavLink>
-      </NavMenu>
-    </Nav>
+            <NavLink to="/users"
+            > Members
+            </NavLink>
+
+            <NavLink to="/forums" >
+            Forums
+            </NavLink>
+
+            <NavLink to="/posts" >
+            All Posts
+            </NavLink>
+
+            <NavBtn>
+              <NavBtnLink to='/login'>Log In</NavBtnLink>
+            </NavBtn>
+
+        </NavMenu>
+      </Nav>
+    </Switch>
   );
 }
 

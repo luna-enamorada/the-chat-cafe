@@ -4,12 +4,9 @@ from flask import Flask, request, make_response, jsonify, session, abort
 from flask_migrate import Migrate
 from werkzeug.exceptions import NotFound, Unauthorized
 
-
 # Local imports
 from config import app, db, api
 from models import User, Forum, Post, Comment
-
-
 
 @app.route('/')
 def index():
