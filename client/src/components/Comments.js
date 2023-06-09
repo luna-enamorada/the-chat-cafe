@@ -12,7 +12,7 @@ function Comments() {
     return (
         <main className="replies">
             <form className="modal__content" onSubmit={handleSubmitComment}>
-                <label htmlFor="comment">Comment on the forum</label>
+                <label htmlFor="comment">Comment on the post!</label>
                 <textarea 
                     rows={5}
                     value={comment}

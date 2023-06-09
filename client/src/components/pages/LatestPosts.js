@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import React, { useState, useEffect } from "react";
 
 function LatestPosts(){
@@ -12,7 +12,9 @@ function LatestPosts(){
   
     const renderPosts = post.map( post => 
       <div>
-        <h2> {post.title} </h2>
+      <Link to={`/forums/${post.id}`}>
+        <h1>{post.title}</h1>
+      </Link>
         <h3> {post.content} </h3>
       </div>
     )
